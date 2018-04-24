@@ -25,23 +25,23 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * @author Uriel_fabs
  */
 
-public class B2proveedorProductoGUI extends JFrame implements ActionListener {
+public class B3sucursalProductoGUI extends JFrame implements ActionListener {
     private JButton bConsultar, bConsultarProducto;
-    private JTextField tfClaveProveedor, tfClaveProducto;
+    private JTextField tfClaveSucursal, tfClaveProducto;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
     //private CompanyADjdbc companyad = new CompanyADjdbc();
 
-    public B2proveedorProductoGUI() {
+    public B3sucursalProductoGUI() {
         super("Consulta de productos");
         panel1 = new JPanel();
         panel2 = new JPanel();
 
         taDatos = new JTextArea(9, 35);//1-3
-        tfClaveProveedor = new JTextField();
+        tfClaveSucursal = new JTextField();
         tfClaveProducto = new JTextField();
-        bConsultar = new JButton("Consulta General de productos");
+        bConsultar = new JButton("Consulta General de sucursales");
         bConsultarProducto = new JButton("Consultar producto");
 
         // Adicionar addActionListener a lo JButtons
@@ -53,8 +53,8 @@ public class B2proveedorProductoGUI extends JFrame implements ActionListener {
         panel2.setLayout(new FlowLayout());
 
         // 3. Colocar los objetos de los atributos en los JPanels correspondientes
-        panel1.add(new JLabel("Clave de prveedor: "));
-        panel1.add(tfClaveProveedor);
+        panel1.add(new JLabel("Clave de Sucursal: "));
+        panel1.add(tfClaveSucursal);
         panel1.add(new JLabel("Clave del producto: "));
         panel1.add(tfClaveProducto);
 
@@ -76,7 +76,7 @@ public class B2proveedorProductoGUI extends JFrame implements ActionListener {
 
     public String obtenerDatos(){
         String datos = "";
-        String clave  = tfClaveProveedor.getText();
+        String clave  = tfClaveSucursal.getText();
         String clave2  = tfClaveProducto.getText();
         
         if(clave.isEmpty() || clave2.isEmpty())
@@ -110,6 +110,6 @@ public class B2proveedorProductoGUI extends JFrame implements ActionListener {
     }
 
     public static void main(String args[]) {
-        new B2proveedorProductoGUI();
+        new B3sucursalProductoGUI();
     }
 }

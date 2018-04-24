@@ -28,7 +28,9 @@ public class CompanyGUI extends JFrame implements ActionListener {
     
     private B1productoLineaGUI productolineagui = new B1productoLineaGUI();
     private B2proveedorProductoGUI proveedorproductogui = new B2proveedorProductoGUI();
-    
+    private B3sucursalProductoGUI sucursalproductogui = new B3sucursalProductoGUI();
+    private B4productoSucursalGUI productosucursalgui = new B4productoSucursalGUI();
+      
     public CompanyGUI() {
         super("Company GUI");
 
@@ -188,6 +190,24 @@ public class CompanyGUI extends JFrame implements ActionListener {
             panel = makePanel();
             panel.add(new JLabel("Consultar productos de linea"));
             panel = proveedorproductogui.getPanel2();
+            
+            add(panel);
+            setVisible(true);
+        }
+        
+        if (e.getSource() == sucursalProducto) {
+            panel = makePanel();
+            panel.add(new JLabel("Consultar productos de linea"));
+            panel = sucursalproductogui.getPanel2();
+            
+            add(panel);
+            setVisible(true);
+        }
+                
+        if (e.getSource() == productoSucursal) {
+            panel = makePanel();
+            panel.add(new JLabel("Consultar productos de linea"));
+            panel = productosucursalgui.getPanel2();
             
             add(panel);
             setVisible(true);
