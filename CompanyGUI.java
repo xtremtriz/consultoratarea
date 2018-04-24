@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class CompanyGUI extends JFrame implements ActionListener {
     private JMenuBar menuBar;
     private JMenu admin_T, sucursal, proveedor, reportes, producto, linea;
+    private JMenuItem productoLinea, proveedorProducto, sucursalProducto, productoSucursal;
     private JMenuItem mExit, AsignarSucursal;
     private JMenuItem AsignarProveedor, AsignarProducto, AsignarLinea, AsignarProductoaSuc, AsignProdProv, AsignarLocalidad;
     
@@ -29,7 +30,6 @@ public class CompanyGUI extends JFrame implements ActionListener {
         super("Company GUI");
 
         menuBar = new JMenuBar();
-
         admin_T = new JMenu("Administracion");
         sucursal = new JMenu("Sucursal");
         proveedor = new JMenu("Proveedor");
@@ -37,6 +37,11 @@ public class CompanyGUI extends JFrame implements ActionListener {
         reportes = new JMenu("Reportes");
         linea = new JMenu("Linea");
         
+        productoLinea = new JMenuItem("Productos que peretenecen a una linea");
+        proveedorProducto = new JMenuItem("Proveedor, productos que suminsstra");
+        sucursalProducto = new JMenuItem("Productos de una sucursal");
+        productoSucursal = new JMenuItem("Producto a que sucursal pertenece");
+                
         AsignarSucursal = new JMenuItem("Introducir datos sucursal");
         AsignarProveedor = new JMenuItem("Introducir datos de proveedor");
         AsignarProducto = new JMenuItem("Ingresar productos");
@@ -55,6 +60,10 @@ public class CompanyGUI extends JFrame implements ActionListener {
         admin_T.add(producto);
         admin_T.add(linea);
         
+        reportes.add(productoLinea);
+        reportes.add(proveedorProducto);
+        reportes.add(sucursalProducto);
+        reportes.add(productoSucursal);
         
         sucursal.add(AsignarSucursal);
         proveedor.add(AsignarProveedor);
@@ -65,6 +74,11 @@ public class CompanyGUI extends JFrame implements ActionListener {
         sucursal.add(AsignarLocalidad);
         proveedor.add(AsignProdProv);
         admin_T.add(mExit);
+
+        productoLinea.addActionListener(this);
+        proveedorProducto.addActionListener(this);
+        sucursalProducto.addActionListener(this);
+        productoSucursal.addActionListener(this);
         
         AsignarSucursal.addActionListener(this);
         AsignarProveedor.addActionListener(this);
