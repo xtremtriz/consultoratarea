@@ -26,6 +26,9 @@ public class CompanyGUI extends JFrame implements ActionListener {
     private A6AsignarProductodeProveedorGUI asignarproductoproveedor = new A6AsignarProductodeProveedorGUI();
     private A7LocalidadGUI localidadgui = new A7LocalidadGUI();
     
+    private B1productoLineaGUI productolineagui = new B1productoLineaGUI();
+    private B2proveedorProductoGUI proveedorproductogui = new B2proveedorProductoGUI();
+    
     public CompanyGUI() {
         super("Company GUI");
 
@@ -38,7 +41,7 @@ public class CompanyGUI extends JFrame implements ActionListener {
         linea = new JMenu("Linea");
         
         productoLinea = new JMenuItem("Productos que peretenecen a una linea");
-        proveedorProducto = new JMenuItem("Proveedor, productos que suminsstra");
+        proveedorProducto = new JMenuItem("Proveedor, productos que suministra");
         sucursalProducto = new JMenuItem("Productos de una sucursal");
         productoSucursal = new JMenuItem("Producto a que sucursal pertenece");
                 
@@ -167,6 +170,24 @@ public class CompanyGUI extends JFrame implements ActionListener {
             panel = makePanel();
             panel.add(new JLabel("Asignación de Productos"));
             panel = localidadgui.getPanel2();
+            
+            add(panel);
+            setVisible(true);
+        }
+        
+        if (e.getSource() == productoLinea) {
+            panel = makePanel();
+            panel.add(new JLabel("Consultar productos de linea"));
+            panel = productolineagui.getPanel2();
+            
+            add(panel);
+            setVisible(true);
+        }
+        
+        if (e.getSource() == proveedorProducto) {
+            panel = makePanel();
+            panel.add(new JLabel("Consultar productos de linea"));
+            panel = proveedorproductogui.getPanel2();
             
             add(panel);
             setVisible(true);
