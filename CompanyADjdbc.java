@@ -44,7 +44,7 @@ public class CompanyADjdbc {
 
 		}
 	}
-    String AltaSeguro(String datos) 
+    String AltaSucursal(String datos) 
     {
 		String resultado = "";
 		String insert="";

@@ -125,7 +125,7 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
 			else{
 			
 				// 3. Capturar los datos del cliente
-				//resultado = companyad.AltaSucursal(datos);
+				resultado = companyad.AltaSucursal(datos);
 				
 				// 4. Desplegar resultado de la transaccion
 				taDatos.setText(resultado);
