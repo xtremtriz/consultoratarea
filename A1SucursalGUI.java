@@ -31,7 +31,8 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
+    
 
     public A1SucursalGUI() {
         super("Asignacion de Sucursal");
@@ -108,18 +109,36 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        String datos = "";
-        if (e.getSource() == bCapturar) {
-            
-        }
+        //String datos = "";
+        if(e.getSource() == bCapturar)
+		{
+			String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("VACIO"))
+				taDatos.setText("Algun campo esta vacio checalo...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				//resultado = companyad.AltaSucursal(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
+		}
 
-        if (e.getSource() == bConsultar) {
+        /*if (e.getSource() == bConsultar) {
             //datos = companyad.consultaAsignacionEmpleadosProyecto();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }
             taDatos.setText(datos); 
-        }
+        }*/
     }
 
     public static void main(String args[]) {
