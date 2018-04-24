@@ -34,7 +34,7 @@ public class B2proveedorProductoGUI extends JFrame implements ActionListener {
     //private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public B2proveedorProductoGUI() {
-        super("Asignacion de Proveedor");
+        super("Consulta de productos");
         panel1 = new JPanel();
         panel2 = new JPanel();
 
