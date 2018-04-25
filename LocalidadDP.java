@@ -68,6 +68,6 @@ public class LocalidadDP {
     }
     
     public String toStringSql(){
-        return "'" + this.estado + "','" + this.colonia + "','" + this.calle + "'," + this.numero + "," + this.cp + "," + this.telefono;
+        return "'" + this.estado + "','" + this.colonia + "','" + this.calle + "','" + this.numero + "','" + this.cp + "'," + this.telefono;
     }
 }

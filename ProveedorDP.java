@@ -52,7 +52,7 @@ public class ProveedorDP {
         return this.claveProveedor + "_" + this.nombre + "_" + this.direccion + "_" + this.telefono;
     }
     public String toStringSql(){
-        return this.claveProveedor + ",'" + this.nombre + "','" + this.direccion + "'," + this.telefono;
+        return "'" + this.claveProveedor + "','" + this.nombre + "','" + this.direccion + "'," + this.telefono;
     }
     
 }

@@ -35,6 +35,6 @@ public class TieneDP {
         return this.numeroSucursal + "_" + this.claveProducto;
     }
     public String toStringSql(){
-        return this.numeroSucursal + "," + this.claveProducto;
+        return "'" + this.numeroSucursal + "'," + this.claveProducto;
     }
 }

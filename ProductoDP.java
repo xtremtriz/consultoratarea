@@ -68,6 +68,6 @@ public class ProductoDP {
         return this.claveProducto + "_" + this.nombre + "_" + this.marca + "_" + this.cantidadExistente + "_" + this.precioUnitario + "_" + this.claveLinea;
     }
     public String toStringSql(){
-        return this.claveProducto + ",'" + this.nombre + "','" + this.marca + "'," + this.cantidadExistente + "," + this.precioUnitario + "," + this.claveLinea;
+        return "'" + this.claveProducto + "','" + this.nombre + "','" + this.marca + "','" + this.cantidadExistente + "','" + this.precioUnitario + "'," + this.claveLinea;
     }
 }
