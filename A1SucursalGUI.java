@@ -95,7 +95,7 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
             int numSu = 0;
             int tel = 0;
             try { 
-                //por si no hay un valor numerico
+                //por si no hay un valor no numerico
                 numSu = Integer.parseInt(numSuc);
                 tel   = Integer.parseInt(telefono);
             } 

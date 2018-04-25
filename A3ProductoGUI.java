@@ -99,10 +99,23 @@ public class A3ProductoGUI extends JFrame implements ActionListener {
         if(clave.isEmpty() || nombr.isEmpty() || marc.isEmpty() || cant.isEmpty() || prec.isEmpty() || clave2.isEmpty())
             datos = "VACIO";
         else {
-            datos = clave+"_"+nombr+"_"+marc+"_"+cant+"_"+prec+"_"+clave2;
-            System.out.println("\nGUI: "+datos);
-        } 
-        System.out.println("\nGUI: "+datos);
+            int cla  = 0;
+            int ca   = 0;
+            int pre  = 0;
+            int cla2 = 0;
+            try { 
+                //por si no hay un valor numerico
+                cla   = Integer.parseInt(clave);
+                ca   = Integer.parseInt(cant);
+                pre  = Integer.parseInt(prec);
+                cla2  = Integer.parseInt(clave2);
+            } 
+            catch (NumberFormatException nfe) {
+                datos = "NO_NUMERICO";
+            }   
+            if (datos!="NO_NUMERICO")
+                datos = cla+"_"+nombr+"_"+marc+"_"+ca+"_"+pre+"_"+cla2;
+        }
         return datos;
     }
 

@@ -92,14 +92,18 @@ public class A2ProveedorGUI extends JFrame implements ActionListener {
             datos ="VACIO";
         else
         {
+            int cla = 0;
+            int tel = 0;
             try {
-                int horas  = Integer.parseInt(clave);
-                int horas1 = Integer.parseInt(telefono);
+                cla  = Integer.parseInt(clave);
+                tel = Integer.parseInt(telefono);
                 datos = clave+"_"+nombr+"_"+direccion+"_"+telefono;
             } 
             catch (NumberFormatException nfe) {
                 datos = "NO_NUMERICO";
             }
+            if (datos!="NO_NUMERICO")
+                datos = cla+"_"+nombr+"_"+direccion+"_"+tel;
         }
         return datos;
     }

@@ -86,10 +86,17 @@ public class A4LineaGUI extends JFrame implements ActionListener {
         if(clave.isEmpty() || nombr.isEmpty() || des.isEmpty())
             datos = "VACIO";
         else {
-            datos = clave+"_"+nombr+"_"+des;
-            System.out.println("\n: "+datos);
-        } 
-        System.out.println("\n: "+datos);
+            int cla = 0;            
+            try { 
+                //por si no hay un valor no numerico
+                cla = Integer.parseInt(clave);
+            } 
+            catch (NumberFormatException nfe) {
+                datos = "NO_NUMERICO";
+            }   
+            if (datos!="NO_NUMERICO")
+                datos = cla+"_"+nombr+"_"+des;
+        }
         return datos;
     }
 
