@@ -103,10 +103,12 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
                 datos = "NO_NUMERICO";
             }   
             if (datos!="NO_NUMERICO")
-                datos = numSuc+"_"+nombr+"_"+direccion+"_"+telefono;
+                datos = numSu+"_"+nombr+"_"+direccion+"_"+tel;
         } 
         return datos;
     }
+    
+    
 
     public void actionPerformed(ActionEvent e) {
         //String datos = "";
@@ -120,7 +122,7 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
 			
 			// 2. Checar si algun campo es vacio o saldo no numerico
 			if(datos.equals("VACIO"))
-				taDatos.setText("Algun campo esta vacio checalo...");
+				taDatos.setText("Algun campo esta vacio...");
 			
 			else{
 			

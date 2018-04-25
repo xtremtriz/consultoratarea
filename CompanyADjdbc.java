@@ -23,7 +23,7 @@ public class CompanyADjdbc {
 	{
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost/company?user=root");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost/consultora?user=root");
 			System.out.println("Conexion exitosa...");
 		}
 		catch(ClassNotFoundException cnfe)
@@ -51,7 +51,7 @@ public class CompanyADjdbc {
 
 		sucursalDP = new SucursalDP(datos);
 		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
-                insert="INSERT INTO accidente VALUES("+sucursalDP.toStringSql()+")";
+                insert="INSERT INTO sucursal VALUES("+sucursalDP.toStringSql()+")";
 		try{
 			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
 				 
@@ -65,12 +65,12 @@ public class CompanyADjdbc {
                         statement.close();
 
 			// 4. Enviar recibo de 
-			resultado = "Captura correctisima";	
+			resultado = "Captura correcta";	
 			System.out.println(insert); 	
 			
 		}catch(SQLException sqle){	
 			System.out.println("Incorrecta: "+sqle); 
-			resultado = "Algun campo esta mal";	
+			resultado = "Este numero de sucursal ya existe";	
 		}
 		return resultado;	
 	}
