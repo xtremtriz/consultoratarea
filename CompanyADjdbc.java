@@ -7,6 +7,7 @@ package consultora;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -74,4 +75,42 @@ public class CompanyADjdbc {
 		}
 		return resultado;	
 	}
+
+    String consultarSucursales() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM sucursal";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        sucursalDP=new SucursalDP();
+                        while(sr.next())
+                        {
+
+                        sucursalDP.setnumSucursal(sr.getInt(1));	
+                        sucursalDP.setNombre(sr.getString(2));	
+                        sucursalDP.setDireccion(sr.getString(3));	
+                        sucursalDP.setTelefono(sr.getInt(4));	
+
+                        datos=datos+sucursalDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;		
+	  
+    
+    }
 }

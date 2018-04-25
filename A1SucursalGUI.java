@@ -134,13 +134,13 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
 			}
 		}
 
-        /*if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+        if (e.getSource() == bConsultar) {            
+            String datos = companyad.consultarSucursales();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }
             taDatos.setText(datos); 
-        }*/
+        }
     }
 
     public static void main(String args[]) {
