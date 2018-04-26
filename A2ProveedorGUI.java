@@ -32,7 +32,8 @@ public class A2ProveedorGUI extends JFrame implements ActionListener {
     private JTextArea taDatos;
 
     //private CompanyADjdbc companyad = new CompanyADjdbc();
-
+    private CompanyADjdbc companyad = new CompanyADjdbc();
+    
     public A2ProveedorGUI() {
         super("Asignacion de Proveedor");
         panel1 = new JPanel();
@@ -57,7 +58,7 @@ public class A2ProveedorGUI extends JFrame implements ActionListener {
         // 3. Colocar los objetos de los atributos en los JPanels correspondientes
         panel1.add(new JLabel("Clave del proveedor: "));
         panel1.add(tfClaveProveedor);
-        panel1.add(new JLabel("Nombre de Sucursal: "));
+        panel1.add(new JLabel("Nombre de Proveedor: "));
         panel1.add(tfNombre);
         panel1.add(new JLabel("Direccion: "));
         panel1.add(tfDireccion);
@@ -89,7 +90,7 @@ public class A2ProveedorGUI extends JFrame implements ActionListener {
         String telefono  = tfTelefono.getText();
         
         if(clave.isEmpty() || nombr.equals("") || direccion.equals("") || telefono.isEmpty())
-            datos ="VACIO";
+            datos ="vacio";
         else
         {
             int cla = 0;
@@ -109,17 +110,34 @@ public class A2ProveedorGUI extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        String datos = "";
-        if (e.getSource() == bCapturar) {
-            
-        }
+        if(e.getSource() == bCapturar)
+		{
+			String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("vacio"))
+				taDatos.setText("Algun campo esta vacio...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				resultado = companyad.AltaProveedor(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
+		}
 
         if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+            String datos = companyad.consultarProveedor();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }
-            taDatos.setText(datos); 
+            taDatos.setText(datos);  
         }
     }
 

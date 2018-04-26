@@ -17,6 +17,7 @@ import java.sql.Statement;
  */
 public class CompanyADjdbc {
     SucursalDP sucursalDP;
+    ProveedorDP proveedorDP;
     
     Connection conexion;
     Statement statement;
@@ -71,7 +72,7 @@ public class CompanyADjdbc {
 			
 		}catch(SQLException sqle){	
 			System.out.println("Incorrecta: "+sqle); 
-			resultado = "Este numero de sucursal ya existe";	
+			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
 		}
 		return resultado;	
 	}
@@ -109,8 +110,72 @@ public class CompanyADjdbc {
 			System.out.println("Error: "+sqle); 
 			datos = "ERROR en la consulta "+ sqle;	
 		}
-		return datos;		
-	  
-    
+		return datos;	  
+    }
+        String AltaProveedor(String datos) 
+    {
+		String resultado = "";
+		String insert="";
+
+		proveedorDP = new ProveedorDP(datos);
+		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
+                insert="INSERT INTO proveedor VALUES("+proveedorDP.toStringSql()+")";
+		try{
+			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
+				 
+			statement=conexion.createStatement();
+		
+			// 2. Abrir o almacenar los datos en archivo	
+			
+			statement.executeUpdate(insert);
+		
+			// 3. Cerrar archivo		
+                        statement.close();
+
+			// 4. Enviar recibo de 
+			resultado = "Captura correcta";	
+			System.out.println(insert); 	
+			
+		}catch(SQLException sqle){	
+			System.out.println("Incorrecta: "+sqle); 
+			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
+		}
+		return resultado;	
+	}
+        
+        String consultarProveedor() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM proveedor";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        proveedorDP=new ProveedorDP();
+                        while(sr.next())
+                        {
+
+                        proveedorDP.setclaveProveedor(sr.getInt(1));	
+                        proveedorDP.setNombre(sr.getString(2));	
+                        proveedorDP.setDireccion(sr.getString(3));	
+                        proveedorDP.setTelefono(sr.getInt(4));	
+
+                        datos=datos+proveedorDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;	  
     }
 }
