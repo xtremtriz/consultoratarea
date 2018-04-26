@@ -18,6 +18,7 @@ import java.sql.Statement;
 public class CompanyADjdbc {
     SucursalDP sucursalDP;
     ProveedorDP proveedorDP;
+    LineaDP lineaDP;
     
     Connection conexion;
     Statement statement;
@@ -112,7 +113,7 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-        String AltaProveedor(String datos) 
+    String AltaProveedor(String datos) 
     {
 		String resultado = "";
 		String insert="";
@@ -167,6 +168,70 @@ public class CompanyADjdbc {
                         proveedorDP.setTelefono(sr.getInt(4));	
 
                         datos=datos+proveedorDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;	  
+    }
+    String AltaLinea(String datos) 
+    {
+		String resultado = "";
+		String insert="";
+
+		lineaDP = new LineaDP(datos);
+		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
+                insert="INSERT INTO linea VALUES("+lineaDP.toStringSql()+")";
+		try{
+			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
+				 
+			statement=conexion.createStatement();
+		
+			// 2. Abrir o almacenar los datos en archivo	
+			
+			statement.executeUpdate(insert);
+		
+			// 3. Cerrar archivo		
+                        statement.close();
+
+			// 4. Enviar recibo de 
+			resultado = "Captura correcta";	
+			System.out.println(insert); 	
+			
+		}catch(SQLException sqle){	
+			System.out.println("Incorrecta: "+sqle); 
+			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
+		}
+		return resultado;	
+	}
+    String consultarLinea() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM linea";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        lineaDP=new LineaDP();
+                        while(sr.next())
+                        {
+
+                        lineaDP.setclaveLinea(sr.getInt(1));	
+                        lineaDP.setNombre(sr.getString(2));	
+                        lineaDP.setDescripcion(sr.getString(3));		
+
+                        datos=datos+lineaDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 

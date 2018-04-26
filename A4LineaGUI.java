@@ -30,10 +30,10 @@ public class A4LineaGUI extends JFrame implements ActionListener {
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public A4LineaGUI() {
-        super("Asignacion de Proveedor");
+        super("Asignacion de Linea");
         panel1 = new JPanel();
         panel2 = new JPanel();
 
@@ -84,7 +84,7 @@ public class A4LineaGUI extends JFrame implements ActionListener {
         String des   = tfDescripcion.getText();
         
         if(clave.isEmpty() || nombr.isEmpty() || des.isEmpty())
-            datos = "VACIO";
+            datos = "vacio";
         else {
             int cla = 0;            
             try { 
@@ -102,12 +102,30 @@ public class A4LineaGUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String datos = "";
-        if (e.getSource() == bCapturar) {
-            
-        }
+        if (e.getSource() == bCapturar) 
+        {
+			//String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("vacio"))
+				taDatos.setText("Algun campo esta vacio...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				resultado = companyad.AltaLinea(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
+		}
 
         if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+            datos = companyad.consultarLinea();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }
