@@ -13,3 +13,18 @@ create table Proveedor(claveProveedor INTEGER NOT NULL,
                 direccion VARCHAR(20) NOT NULL,
                 telefono INTEGER NOT NULL,
                 PRIMARY KEY(claveProveedor));
+
+create table Linea(claveLinea INTEGER NOT NULL,
+                nombre VARCHAR(15) NOT NULL,
+                descripcion VARCHAR(30) NOT NULL,
+                PRIMARY KEY(claveLinea));
+
+create table Producto(claveProducto INTEGER NOT NULL,
+                nombre VARCHAR(15) NOT NULL,
+                marca VARCHAR(20) NOT NULL,
+                cantidad INTEGER NOT NULL,
+                precio INTEGER NOT NULL,
+                clave_lin INTEGER NOT NULL,
+                PRIMARY KEY(claveProduto)
+                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea));
+                
