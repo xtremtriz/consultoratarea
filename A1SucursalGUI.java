@@ -31,7 +31,8 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
+    
 
     public A1SucursalGUI() {
         super("Asignacion de Sucursal");
@@ -48,7 +49,7 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
 
         // Adicionar addActionListener a lo JButtons
         bCapturar.addActionListener(this);
-        bConsultar.addActionListener(this);;
+        bConsultar.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
         panel1.setLayout(new GridLayout(8, 2));
@@ -94,30 +95,52 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
             int numSu = 0;
             int tel = 0;
             try { 
-                //por si no hay un valor numerico
+                //por si no hay un valor no numerico
                 numSu = Integer.parseInt(numSuc);
                 tel   = Integer.parseInt(telefono);
             } 
             catch (NumberFormatException nfe) {
                 datos = "NO_NUMERICO";
+                taDatos.setText("Ingresa valores numericos...");
             }   
             if (datos!="NO_NUMERICO")
-                datos = numSuc+"_"+nombr+"_"+direccion+"_"+telefono;
+                datos = numSu+"_"+nombr+"_"+direccion+"_"+tel;
         } 
         return datos;
     }
+    
+    
 
     public void actionPerformed(ActionEvent e) {
-        String datos = "";
-        if (e.getSource() == bCapturar) {
-            
-        }
+        //String datos = "";
+        if(e.getSource() == bCapturar)
+		{
+			String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("vacio"))
+				taDatos.setText("Algun campo esta vacio...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				resultado = companyad.AltaSucursal(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
+		}
 
-        if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+        if (e.getSource() == bConsultar) { 
+            //System.out.println("Entra");
+            String datos = companyad.consultarSucursales();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
-            }
+            }            
             taDatos.setText(datos); 
         }
     }

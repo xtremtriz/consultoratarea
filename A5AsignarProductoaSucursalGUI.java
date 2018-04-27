@@ -27,11 +27,12 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class A5AsignarProductoaSucursalGUI extends JFrame implements ActionListener {
     private JButton bConsultar, bCapturar;
+    private JButton bConsultarSucursal, bConsultarProducto;
     private JTextField tfNumSucursal, tfClaveProducto;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public A5AsignarProductoaSucursalGUI() {
         super("Asignacion de Proveedor");
@@ -43,10 +44,14 @@ public class A5AsignarProductoaSucursalGUI extends JFrame implements ActionListe
         tfClaveProducto = new JTextField();
         bCapturar = new JButton("Capturar datos");
         bConsultar = new JButton("Consulta General");
+        bConsultarSucursal = new JButton("Consultar Sucursales");
+        bConsultarProducto = new JButton("Consultar Productos");
 
         // Adicionar addActionListener a lo JButtons
         bCapturar.addActionListener(this);
-        bConsultar.addActionListener(this);;
+        bConsultar.addActionListener(this);
+        bConsultarSucursal.addActionListener(this);
+        bConsultarProducto.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
         panel1.setLayout(new GridLayout(8, 2));
@@ -60,6 +65,8 @@ public class A5AsignarProductoaSucursalGUI extends JFrame implements ActionListe
         
         panel1.add(bCapturar);
         panel1.add(bConsultar);
+        panel1.add(bConsultarSucursal);
+        panel1.add(bConsultarProducto);
         // panel1.add(bSalir);
 
         panel2.add(panel1);
@@ -101,12 +108,46 @@ public class A5AsignarProductoaSucursalGUI extends JFrame implements ActionListe
 
     public void actionPerformed(ActionEvent e) {
         String datos = "";
-        if (e.getSource() == bCapturar) {
-            
-        }
+        if (e.getSource() == bCapturar) 
+        {
+			//String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("vacio"))
+				taDatos.setText("Algun campo esta vacio...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				resultado = companyad.AltaTiene(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
+		}
+
 
         if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+            datos = companyad.consultarTiene();
+            if(datos.isEmpty()){
+                datos = "Datos vacios";
+            }
+            taDatos.setText(datos); 
+        }
+        
+        if (e.getSource() == bConsultarSucursal) {
+            datos = companyad.consultarSucursales();
+            if(datos.isEmpty()){
+                datos = "Datos vacios";
+            }
+            taDatos.setText(datos); 
+        }
+        if (e.getSource() == bConsultarProducto) {
+            datos = companyad.consultarProducto();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }

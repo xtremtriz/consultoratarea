@@ -54,6 +54,6 @@ public class SuministraDP {
         return this.claveProducto + "_" + this.claveProveedor + "_" + this.fecha + "_" + this.cantidad;
     }
     public String toStringSql(){
-        return this.claveProducto + "," + this.claveProveedor + ",''" + this.fecha + "'," + this.cantidad;
+        return "'" + this.claveProducto + "','" + this.claveProveedor + "','" + this.fecha + "'," + this.cantidad;
     }
 }

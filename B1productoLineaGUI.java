@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package consultora;
+
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -23,29 +25,28 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * @author Uriel_fabs
  */
 
-public class A4LineaGUI extends JFrame implements ActionListener {
-    private JButton bConsultar, bCapturar;
-    private JTextField tfClaveLinea, tfNombre, tfDescripcion;
+public class B1productoLineaGUI extends JFrame implements ActionListener {
+    private JButton bConsultar, bConsultarProducto;
+    private JTextField tfClaveLinea, tfClaveProducto;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    private CompanyADjdbc companyad = new CompanyADjdbc();
+    //private CompanyADjdbc companyad = new CompanyADjdbc();
 
-    public A4LineaGUI() {
-        super("Asignacion de Linea");
+    public B1productoLineaGUI() {
+        super("Asignacion de Proveedor");
         panel1 = new JPanel();
         panel2 = new JPanel();
 
         taDatos = new JTextArea(9, 35);//1-3
         tfClaveLinea = new JTextField();
-        tfNombre = new JTextField();
-        tfDescripcion = new JTextField();
-        bCapturar = new JButton("Capturar datos");
-        bConsultar = new JButton("Consulta General");
+        tfClaveProducto = new JTextField();
+        bConsultar = new JButton("Consulta General de productos");
+        bConsultarProducto = new JButton("Consultar producto");
 
         // Adicionar addActionListener a lo JButtons
-        bCapturar.addActionListener(this);
-        bConsultar.addActionListener(this);;
+        bConsultar.addActionListener(this);
+        bConsultarProducto.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
         panel1.setLayout(new GridLayout(8, 2));
@@ -54,14 +55,11 @@ public class A4LineaGUI extends JFrame implements ActionListener {
         // 3. Colocar los objetos de los atributos en los JPanels correspondientes
         panel1.add(new JLabel("Clave de linea: "));
         panel1.add(tfClaveLinea);
-        panel1.add(new JLabel("Nombre de linea: "));
-        panel1.add(tfNombre);
-        panel1.add(new JLabel("Descripcion: "));
-        panel1.add(tfDescripcion);
-        
-        panel1.add(bCapturar);
+        panel1.add(new JLabel("Clave del producto: "));
+        panel1.add(tfClaveProducto);
+
         panel1.add(bConsultar);
-        // panel1.add(bSalir);
+        panel1.add(bConsultarProducto);
 
         panel2.add(panel1);
         panel2.add(new JScrollPane(taDatos));
@@ -79,52 +77,31 @@ public class A4LineaGUI extends JFrame implements ActionListener {
     public String obtenerDatos(){
         String datos = "";
         String clave  = tfClaveLinea.getText();
-        String nombr  = tfNombre.getText();
-        String des   = tfDescripcion.getText();
+        String clave2  = tfClaveProducto.getText();
         
-        if(clave.isEmpty() || nombr.isEmpty() || des.isEmpty())
-            datos = "vacio";
+        if(clave.isEmpty() || clave2.isEmpty())
+            datos = "VACIO";
         else {
-            int cla = 0;            
-            try { 
-                //por si no hay un valor no numerico
-                cla = Integer.parseInt(clave);
-            } 
-            catch (NumberFormatException nfe) {
-                datos = "NO_NUMERICO";
-            }   
-            if (datos!="NO_NUMERICO")
-                datos = cla+"_"+nombr+"_"+des;
-        }
+            datos = clave+"_"+clave2;
+            System.out.println("\n: "+datos);
+        } 
+        System.out.println("\n: "+datos);
         return datos;
     }
 
     public void actionPerformed(ActionEvent e) {
         String datos = "";
-        if (e.getSource() == bCapturar) 
-        {
-			//String datos="";
-			String resultado="";
-			
-			// 1. Obtner dato de los JTextFields
-			datos = obtenerDatos();
-			
-			// 2. Checar si algun campo es vacio o saldo no numerico
-			if(datos.equals("vacio"))
-				taDatos.setText("Algun campo esta vacio...");
-			
-			else{
-			
-				// 3. Capturar los datos del cliente
-				resultado = companyad.AltaLinea(datos);
-				
-				// 4. Desplegar resultado de la transaccion
-				taDatos.setText(resultado);
-			}
-		}
+
 
         if (e.getSource() == bConsultar) {
-            datos = companyad.consultarLinea();
+            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+            if(datos.isEmpty()){
+                datos = "Datos vacios";
+            }
+            taDatos.setText(datos); 
+        }
+        if (e.getSource() == bConsultarProducto) {
+            //datos = companyad.consultaAsignacionEmpleadosProyecto();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }
@@ -133,6 +110,6 @@ public class A4LineaGUI extends JFrame implements ActionListener {
     }
 
     public static void main(String args[]) {
-        new A4LineaGUI();
+        new B1productoLineaGUI();
     }
 }

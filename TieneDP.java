@@ -1,32 +1,32 @@
 package consultora;
 import java.util.StringTokenizer;
 public class TieneDP {
-    private String numeroSucursal, claveProducto;
+    private int numeroSucursal, claveProducto;
     
     public TieneDP(){
-        this.numeroSucursal = "";
-        this.claveProducto  = "";
+        this.numeroSucursal = 0;
+        this.claveProducto  = 0;
     }
     public TieneDP(String datos){
         StringTokenizer st  = new StringTokenizer(datos, "_");
-        this.numeroSucursal = st.nextToken();
-        this.claveProducto  = st.nextToken();
+        this.numeroSucursal = Integer.parseInt(st.nextToken());
+        this.claveProducto  = Integer.parseInt(st.nextToken());
     }
     
 /* GETTERS */
-    public String getNumeroSucursal() {
+    public int getNumeroSucursal() {
         return this.numeroSucursal;
     }
-    public String getClaveProducto() {
+    public int getClaveProducto() {
         return this.claveProducto;
     }
 
 /* SETTERS */
-    public void setNumeroSucursal(String num) {
+    public void setNumeroSucursal(int num) {
         this.numeroSucursal = num;
     }
 
-    public void setClaveProducto(String clave) {
+    public void setClaveProducto(int clave) {
         this.claveProducto = clave;
     }
  
@@ -35,6 +35,6 @@ public class TieneDP {
         return this.numeroSucursal + "_" + this.claveProducto;
     }
     public String toStringSql(){
-        return this.numeroSucursal + "," + this.claveProducto;
+        return "'" + this.numeroSucursal + "'," + this.claveProducto;
     }
 }

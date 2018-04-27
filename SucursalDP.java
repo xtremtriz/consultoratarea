@@ -52,6 +52,6 @@ public class SucursalDP {
         return this.numSucursal + "_" + this.nombre + "_" + this.direccion + "_" + this.telefono;
     }
     public String toStringSql(){
-        return this.numSucursal + ",'" + this.nombre + "','" + this.direccion + "'," + this.telefono;
+        return "'" + this.numSucursal + "','" + this.nombre + "','" + this.direccion + "'," + this.telefono;
     }
 }
