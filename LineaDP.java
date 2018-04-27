@@ -44,6 +44,6 @@ public class LineaDP {
     }
     
     public String toStringSql(){
-        return this.claveLinea + ",'" + this.nombre + "','" + this.descripcion + "'";
+        return "'" + this.claveLinea + "','" + this.nombre + "','" + this.descripcion + "'";
     }
 }

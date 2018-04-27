@@ -19,12 +19,13 @@ create table Linea(claveLinea INTEGER NOT NULL,
                 descripcion VARCHAR(30) NOT NULL,
                 PRIMARY KEY(claveLinea));
 
-create table Producto(claveProducto INTEGER NOT NULL,
+create table Producto(
+                claveProducto int NOT NULL,
                 nombre VARCHAR(15) NOT NULL,
                 marca VARCHAR(20) NOT NULL,
                 cantidad INTEGER NOT NULL,
                 precio INTEGER NOT NULL,
-                clave_lin INTEGER NOT NULL,
-                PRIMARY KEY(claveProduto)
+                claveLin INTEGER NOT NULL,
+                PRIMARY KEY(claveProducto),
                 FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea));
                 

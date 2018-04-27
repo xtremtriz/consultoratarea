@@ -49,7 +49,7 @@ public class A1SucursalGUI extends JFrame implements ActionListener {
 
         // Adicionar addActionListener a lo JButtons
         bCapturar.addActionListener(this);
-        bConsultar.addActionListener(this);;
+        bConsultar.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
         panel1.setLayout(new GridLayout(8, 2));
