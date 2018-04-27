@@ -19,7 +19,7 @@ public class CompanyADjdbc {
     SucursalDP sucursalDP;
     ProveedorDP proveedorDP;
     LineaDP lineaDP;
-    ProductoDP productoDP;
+    ProductoDP productoDP = new ProductoDP();;
     TieneDP tieneDP;
     SuministraDP suministraDP;
     LocalidadDP localidadDP;
@@ -387,10 +387,16 @@ public class CompanyADjdbc {
     {
 		String resultado = "";
 		String insert="";
+                String insert2;
 
 		suministraDP = new SuministraDP(datos);
+                //productoDP = new ProductoDP();
+                int newCantidad = suministraDP.getCantidad() + productoDP.getcantidadExistente();
+                int clave = suministraDP.getClaveProducto();
+                System.out.println("Cantidad anterior: "+ (newCantidad - suministraDP.getCantidad()) + "\n Nueva Cantidad: "+newCantidad);
 		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
                 insert="INSERT INTO Suministra VALUES("+suministraDP.toStringSql()+")";
+                insert2="UPDATE producto SET cantidad = "+newCantidad+" WHERE claveProducto = "+ clave ;
 		try{
 			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
 				 
@@ -399,6 +405,7 @@ public class CompanyADjdbc {
 			// 2. Abrir o almacenar los datos en archivo	
 			
 			statement.executeUpdate(insert);
+                        statement.executeUpdate(insert2);
 		
 			// 3. Cerrar archivo		
                         statement.close();
