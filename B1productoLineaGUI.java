@@ -31,7 +31,7 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public B1productoLineaGUI() {
         super("Asignacion de Proveedor");
@@ -101,11 +101,10 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
             taDatos.setText(datos); 
         }
         if (e.getSource() == bConsultarProducto) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+            datos = companyad.consultarProducto();
             if(datos.isEmpty()){
-                datos = "Datos vacios";
+                datos = "Datos vacios";                
             }
-            taDatos.setText(datos); 
         }
     }
 

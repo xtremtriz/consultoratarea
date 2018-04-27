@@ -32,7 +32,6 @@ create table Producto(
 CREATE TABLE Tiene(
             numeroSucursal INTEGER NOT NULL,
             numeroProducto INTEGER NOT NULL,
-            PRIMARY KEY(numeroSucursal, numeroProducto),
             FOREIGN KEY(numeroSucursal) REFERENCES Sucursal(claveSucursal),
             FOREIGN KEY(numeroProducto) REFERENCES Producto(claveProducto));      
                 
@@ -41,7 +40,6 @@ CREATE TABLE Suministra(
             claveProveedo INTEGER NOT NULL,
             fecha VARCHAR(45) NOT NULL,
             cantidad INTEGER NOT NULL,
-            PRIMARY KEY(claveProduct, claveProveedo),
             FOREIGN KEY(claveProduct) REFERENCES Producto(claveProducto),
             FOREIGN KEY(claveProveedo) REFERENCES Proveedor(claveProveedor));
 
@@ -54,3 +52,5 @@ CREATE TABLE Localidad(
             cp INTEGER NOT NULL,
             claveSucursa INTEGER NOT NULL,
             FOREIGN KEY(claveSucursa) REFERENCES Sucursal(claveSucursal));
+
+SELECT Linea.nombre, Producto.claveProducto FROM Producto JOIN Linea ON Producto.claveLin = Linea.claveLinea WHERE claveLinea = 45;
