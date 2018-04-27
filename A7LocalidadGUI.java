@@ -121,7 +121,7 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
                 datos = "NO_NUMERICO";
             }   
             if (datos!="NO_NUMERICO")
-                datos = est+"_"+col+"_"+call+"_"+num+"_"+cp+"_"+tel+"_"+suc1;
+                datos = est+"_"+col+"_"+call+"_"+num1+"_"+cp1+"_"+tel1+"_"+suc1;
         } 
         return datos;
     }
