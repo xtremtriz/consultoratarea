@@ -52,10 +52,11 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
 
         // Adicionar addActionListener a lo JButtons
         bCapturar.addActionListener(this);
-        bConsultar.addActionListener(this);;
+        bConsultar.addActionListener(this);
+        bConsultarSucursal.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
-        panel1.setLayout(new GridLayout(8, 2));
+        panel1.setLayout(new GridLayout(10, 2));
         panel2.setLayout(new FlowLayout());
 
         // 3. Colocar los objetos de los atributos en los JPanels correspondientes
@@ -76,6 +77,7 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
         
         panel1.add(bCapturar);
         panel1.add(bConsultar);
+        panel1.add(bConsultarSucursal);
         // panel1.add(bSalir);
 
         panel2.add(panel1);
@@ -152,6 +154,14 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
         if (e.getSource() == bConsultar) { 
             //System.out.println("Entra");
             String datos = companyad.consultarLocalidad();
+            if(datos.isEmpty()){
+                datos = "Datos vacios";
+            }            
+            taDatos.setText(datos); 
+        }
+        if (e.getSource() == bConsultarSucursal) { 
+            //System.out.println("Entra");
+            String datos = companyad.consultarSucursales();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
             }            
