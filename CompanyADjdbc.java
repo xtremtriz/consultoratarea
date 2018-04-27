@@ -21,6 +21,7 @@ public class CompanyADjdbc {
     LineaDP lineaDP;
     ProductoDP productoDP;
     TieneDP tieneDP;
+    SuministraDP suministraDP;
     
     Connection conexion;
     Statement statement;
@@ -369,6 +370,73 @@ public class CompanyADjdbc {
                       
 
                         datos=datos+tieneDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;	  
+    }
+    
+    String altaSuministra(String datos) 
+    {
+		String resultado = "";
+		String insert="";
+
+		suministraDP = new SuministraDP(datos);
+		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
+                insert="INSERT INTO Suminstra VALUES("+suministraDP.toStringSql()+")";
+		try{
+			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
+				 
+			statement=conexion.createStatement();
+		
+			// 2. Abrir o almacenar los datos en archivo	
+			
+			statement.executeUpdate(insert);
+		
+			// 3. Cerrar archivo		
+                        statement.close();
+
+			// 4. Enviar recibo de 
+			resultado = "Captura correcta";	
+			System.out.println(insert); 	
+			
+		}catch(SQLException sqle){	
+			System.out.println("Incorrecta: "+sqle); 
+			resultado = "(Ingresa otro)";	
+		}
+		return resultado;	
+	}
+    String consultarSuminstra() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM suministra";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        suministraDP=new SuministraDP();
+                        while(sr.next())
+                        {
+
+                        suministraDP.setClaveProducto(sr.getInt(1));
+                        suministraDP.setClaveProveedor(sr.getInt(2));
+                        suministraDP.setfecha(sr.getString(3));
+                        suministraDP.setCantidad(sr.getInt(4));	
+                      
+
+                        datos=datos+suministraDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 
