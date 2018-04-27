@@ -22,6 +22,7 @@ public class CompanyADjdbc {
     ProductoDP productoDP;
     TieneDP tieneDP;
     SuministraDP suministraDP;
+    LocalidadDP localidadDP;
     
     Connection conexion;
     Statement statement;
@@ -389,7 +390,7 @@ public class CompanyADjdbc {
 
 		suministraDP = new SuministraDP(datos);
 		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
-                insert="INSERT INTO Suminstra VALUES("+suministraDP.toStringSql()+")";
+                insert="INSERT INTO Suministra VALUES("+suministraDP.toStringSql()+")";
 		try{
 			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
 				 
@@ -448,4 +449,74 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
+    
+    String altaLocalidad(String datos) 
+    {
+		String resultado = "";
+		String insert="";
+
+		localidadDP = new LocalidadDP(datos);
+		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
+                insert="INSERT INTO localidad VALUES("+localidadDP.toStringSql()+")";
+		try{
+			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
+				 
+			statement=conexion.createStatement();
+		
+			// 2. Abrir o almacenar los datos en archivo	
+			
+			statement.executeUpdate(insert);
+		
+			// 3. Cerrar archivo		
+                        statement.close();
+
+			// 4. Enviar recibo de 
+			resultado = "Captura correcta";	
+			System.out.println(insert); 	
+			
+		}catch(SQLException sqle){	
+			System.out.println("Incorrecta: "+sqle); 
+			resultado = "(Ingresa otro)";	
+		}
+		return resultado;	
+	}
+    
+    String consultarLocalidad() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM localidad";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        localidadDP=new LocalidadDP();
+                        while(sr.next())
+                        {
+                        localidadDP.setEstado(sr.getString(1));
+                        localidadDP.setColonia(sr.getString(2));
+                        localidadDP.setCalle(sr.getString(3));
+                        localidadDP.setNumero(sr.getInt(4));	
+                        localidadDP.setCp(sr.getInt(5));
+                        localidadDP.setTelefono(sr.getInt(6));
+                        localidadDP.setClaveSucursal(sr.getInt(7));
+
+                        datos=datos+localidadDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;	  
+    }
+    
 }

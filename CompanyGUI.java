@@ -53,9 +53,9 @@ public class CompanyGUI extends JFrame implements ActionListener {
         AsignarLinea = new JMenuItem("Ingresar datos de linea");
         
         
-        AsignarProductoaSuc = new JMenuItem("Asignar producto a Sucursal");
-        AsignProdProv = new JMenuItem("Asignar productos del proveedor");
-        AsignarLocalidad = new JMenuItem("Asignar direcion de Sucursal");
+        AsignarProductoaSuc = new JMenuItem("Asignar producto a Sucursal (tiene)");
+        AsignProdProv = new JMenuItem("Asignar productos del proveedor (suministra)");
+        AsignarLocalidad = new JMenuItem("Asignar direcion de Sucursal (localidad)");
         mExit = new JMenuItem("Salir");
        
         menuBar.add(admin_T);

@@ -26,12 +26,12 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 
 public class A7LocalidadGUI extends JFrame implements ActionListener {
-    private JButton bConsultar, bCapturar;
-    private JTextField tfEstado, tfColonia, tfCalle, tfNumero, tfCp, tfTelefono;
+    private JButton bConsultar, bCapturar, bConsultarSucursal;
+    private JTextField tfEstado, tfColonia, tfCalle, tfNumero, tfCp, tfTelefono, tfClaveSucursal;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public A7LocalidadGUI() {
         super("Asignacion de Sucursal");
@@ -45,8 +45,10 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
         tfNumero = new JTextField();
         tfCp = new JTextField();
         tfTelefono = new JTextField();
+        tfClaveSucursal = new JTextField();
         bCapturar = new JButton("Capturar datos");
         bConsultar = new JButton("Consulta General");
+        bConsultarSucursal = new JButton("Consulta de sucursales");
 
         // Adicionar addActionListener a lo JButtons
         bCapturar.addActionListener(this);
@@ -69,6 +71,8 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
         panel1.add(tfCp);
         panel1.add(new JLabel("Telefono: "));
         panel1.add(tfTelefono);
+        panel1.add(new JLabel("Clave de Sucursal: "));
+        panel1.add(tfClaveSucursal);
         
         panel1.add(bCapturar);
         panel1.add(bConsultar);
@@ -95,39 +99,62 @@ public class A7LocalidadGUI extends JFrame implements ActionListener {
         String num  = tfNumero.getText();
         String cp   = tfCp.getText();
         String tel  = tfTelefono.getText();
+        String suc  = tfClaveSucursal.getText();
         
-        if(est.isEmpty() || col.isEmpty() || call.isEmpty() || num.isEmpty() || cp.isEmpty() || tel.isEmpty())
+        if(est.isEmpty() || col.isEmpty() || call.isEmpty() || num.isEmpty() || cp.isEmpty() || tel.isEmpty() || suc.isEmpty())
             datos = "vacio";
         else {
             int num1 = 0;
             int cp1 = 0;
             int tel1 = 0;
+            int suc1 = 0;
             try { 
                 //por si no hay un valor numerico
                 num1 = Integer.parseInt(num);
                 cp1 = Integer.parseInt(cp);
                 tel1 = Integer.parseInt(tel);
+                suc1 = Integer.parseInt(suc);
             } 
             catch (NumberFormatException nfe) {
                 datos = "NO_NUMERICO";
             }   
             if (datos!="NO_NUMERICO")
-                datos = est+"_"+col+"_"+call+"_"+num+"_"+cp+"_"+tel;
+                datos = est+"_"+col+"_"+call+"_"+num+"_"+cp+"_"+tel+"_"+suc1;
         } 
         return datos;
     }
 
     public void actionPerformed(ActionEvent e) {
-        String datos = "";
-        if (e.getSource() == bCapturar) {
-            
-        }
+        //String datos = "";
+        if(e.getSource() == bCapturar)
+		{
+			String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("vacio"))
+				taDatos.setText("Algun campo esta vacio...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				resultado = companyad.altaLocalidad(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
+		}
 
-        if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+
+        if (e.getSource() == bConsultar) { 
+            //System.out.println("Entra");
+            String datos = companyad.consultarLocalidad();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
-            }
+            }            
             taDatos.setText(datos); 
         }
     }

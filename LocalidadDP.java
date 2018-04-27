@@ -3,7 +3,7 @@ import java.util.StringTokenizer;
 
 public class LocalidadDP {
     private String calle, colonia, estado;
-    private int numero, telefono, cp;
+    private int numero, telefono, cp, claveSucursal;
     
     public LocalidadDP(){
         this.estado     = "";
@@ -12,6 +12,7 @@ public class LocalidadDP {
         this.numero     = 0;
         this.cp         = 0;
         this.telefono   = 0;
+        this.claveSucursal = 0;
     }
     
     public LocalidadDP(String datos){
@@ -22,6 +23,7 @@ public class LocalidadDP {
         this.numero     = Integer.parseInt(st.nextToken());
         this.cp         = Integer.parseInt(st.nextToken());
         this.telefono   = Integer.parseInt(st.nextToken());
+        this.claveSucursal = Integer.parseInt(st.nextToken());
     }
 /* GETTERS */
     public String getEstado() {
@@ -41,6 +43,9 @@ public class LocalidadDP {
     }
     public int getTelefono() {
         return this.telefono;
+    }
+    public int getclaveSucursal(){
+        return this.claveSucursal;
     }
 /* SETTERS */
     public void setEstado(String state) {
@@ -62,12 +67,17 @@ public class LocalidadDP {
         this.telefono = phone;
     }
 
+    public void setClaveSucursal(int claveSuc){
+        this.claveSucursal = claveSuc;
+    }
+    
+
     @Override
     public String toString(){
-        return this.estado + "_" + this.colonia + "_" + this.calle + "_" + this.numero + "_" + this.cp + "_" + this.telefono;
+        return this.estado + "_" + this.colonia + "_" + this.calle + "_" + this.numero + "_" + this.cp + "_" + this.telefono + "_" + this.claveSucursal;
     }
     
     public String toStringSql(){
-        return "'" + this.estado + "','" + this.colonia + "','" + this.calle + "','" + this.numero + "','" + this.cp + "'," + this.telefono;
+        return "'" + this.estado + "','" + this.colonia + "','" + this.calle + "','" + this.numero + "','" + this.cp + "','" + this.telefono + "'," + this.claveSucursal;
     }
 }
