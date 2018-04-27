@@ -20,12 +20,19 @@ create table Linea(claveLinea INTEGER NOT NULL,
                 PRIMARY KEY(claveLinea));
 
 create table Producto(
-                claveProducto int NOT NULL,
+                claveProducto INTEGER NOT NULL,
                 nombre VARCHAR(15) NOT NULL,
                 marca VARCHAR(20) NOT NULL,
                 cantidad INTEGER NOT NULL,
                 precio INTEGER NOT NULL,
                 claveLin INTEGER NOT NULL,
                 PRIMARY KEY(claveProducto),
-                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea));
+                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea
+
+CREATE TABLE Tiene(
+            numeroSucursal INTEGER NOT NULL,
+            numeroProducto INTEGER NOT NULL,
+            PRIMARY KEY(numeroSucursal, numeroProducto),
+            FOREIGN KEY(numeroSucursal) REFERENCES Sucursal(claveSucursal),
+            FOREIGN KEY(numeroProducto) REFERENCES Producto(claveProducto));      
                 

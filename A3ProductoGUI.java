@@ -31,7 +31,7 @@ public class A3ProductoGUI extends JFrame implements ActionListener {
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public A3ProductoGUI() {
         super("Asignacion de Proveedor");
@@ -97,7 +97,7 @@ public class A3ProductoGUI extends JFrame implements ActionListener {
         String clave2  = tfClaveLinea.getText();
         
         if(clave.isEmpty() || nombr.isEmpty() || marc.isEmpty() || cant.isEmpty() || prec.isEmpty() || clave2.isEmpty())
-            datos = "VACIO";
+            datos = "vacio";
         else {
             int cla  = 0;
             int ca   = 0;
@@ -121,15 +121,35 @@ public class A3ProductoGUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         String datos = "";
-        if (e.getSource() == bCapturar) {
-            
+        if (e.getSource() == bCapturar) 
+        {
+			//String datos="";
+			String resultado="";
+			
+			// 1. Obtner dato de los JTextFields
+			datos = obtenerDatos();
+			
+			// 2. Checar si algun campo es vacio o saldo no numerico
+			if(datos.equals("vacio"))
+				taDatos.setText("Algun campo esta vacio...");
+			
+			else{
+			
+				// 3. Capturar los datos del cliente
+				resultado = companyad.AltaProductos(datos);
+				
+				// 4. Desplegar resultado de la transaccion
+				taDatos.setText(resultado);
+			}
         }
 
         if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
+            datos = companyad.consultarProducto();
             if(datos.isEmpty()){
                 datos = "Datos vacios";
+                
             }
+            System.out.println(datos);
             taDatos.setText(datos); 
         }
     }

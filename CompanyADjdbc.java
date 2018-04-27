@@ -19,6 +19,8 @@ public class CompanyADjdbc {
     SucursalDP sucursalDP;
     ProveedorDP proveedorDP;
     LineaDP lineaDP;
+    ProductoDP productoDP;
+    TieneDP tieneDP;
     
     Connection conexion;
     Statement statement;
@@ -232,6 +234,141 @@ public class CompanyADjdbc {
                         lineaDP.setDescripcion(sr.getString(3));		
 
                         datos=datos+lineaDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;	  
+    }
+    
+    String AltaProductos(String datos) 
+    {
+		String resultado = "";
+		String insert="";
+
+		productoDP = new ProductoDP(datos);
+		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
+                insert="INSERT INTO Producto VALUES("+productoDP.toStringSql()+")";
+		try{
+			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
+				 
+			statement=conexion.createStatement();
+		
+			// 2. Abrir o almacenar los datos en archivo	
+			
+			statement.executeUpdate(insert);
+		
+			// 3. Cerrar archivo		
+                        statement.close();
+
+			// 4. Enviar recibo de 
+			resultado = "Captura correcta";	
+			System.out.println(insert); 	
+			
+		}catch(SQLException sqle){	
+			System.out.println("Incorrecta: "+sqle); 
+			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
+		}
+		return resultado;	
+	}
+    
+    String consultarProducto() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM producto";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        productoDP=new ProductoDP();
+                        while(sr.next())
+                        {
+
+                        productoDP.setclaveProducto(sr.getInt(1));	
+                        productoDP.setNombre(sr.getString(2));	
+                        productoDP.setMarca(sr.getString(3));
+                        productoDP.setcantidadExistente(sr.getInt(4));
+                        productoDP.setprecioUnitario(sr.getInt(5));
+                        productoDP.setclaveLinea(sr.getInt(6));
+
+                        datos=datos+productoDP.toString()+"\n";
+                        }
+        	statement.close();
+        	System.out.println(query); 
+		}
+	
+		catch(SQLException sqle){
+			System.out.println("Error: "+sqle); 
+			datos = "ERROR en la consulta "+ sqle;	
+		}
+		return datos;	  
+    }
+    
+    String AltaTiene(String datos) 
+    {
+		String resultado = "";
+		String insert="";
+
+		tieneDP = new TieneDP(datos);
+		//insert="INSERT INTO Cliente VALUES("+clienteDP.toStringSql()+")";
+                insert="INSERT INTO Tiene VALUES("+tieneDP.toStringSql()+")";
+		try{
+			// 1. Abrir archivo de datos(abrir la base de datos para manipular cualquier tabla de la base datos )
+				 
+			statement=conexion.createStatement();
+		
+			// 2. Abrir o almacenar los datos en archivo	
+			
+			statement.executeUpdate(insert);
+		
+			// 3. Cerrar archivo		
+                        statement.close();
+
+			// 4. Enviar recibo de 
+			resultado = "Captura correcta";	
+			System.out.println(insert); 	
+			
+		}catch(SQLException sqle){	
+			System.out.println("Incorrecta: "+sqle); 
+			resultado = "(Ingresa otro)";	
+		}
+		return resultado;	
+	}
+    
+    String consultarTiene() {
+		String datos = "";
+		String query   = "";
+	
+		ResultSet sr=null;
+		
+		query="SELECT *FROM tiene";
+
+		try{
+			// 1. Abrir archivo de datos
+			statement=conexion.createStatement();
+			// 2. Procesar datos
+			sr=statement.executeQuery(query);	
+                        //archivoIn.close();
+                        tieneDP=new TieneDP();
+                        while(sr.next())
+                        {
+
+                        tieneDP.setNumeroSucursal(sr.getInt(1));	
+                        tieneDP.setClaveProducto(sr.getInt(2));	
+                      
+
+                        datos=datos+tieneDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 
