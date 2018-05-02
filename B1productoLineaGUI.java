@@ -74,30 +74,42 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
         return this.panel2;
     }
 
-    public String obtenerDatos(){
-        String datos = "";
-        String clave  = tfClaveLinea.getText();
-        String clave2  = tfClaveProducto.getText();
+    public int obtenerDatos(){
+        String num  = tfClaveLinea.getText();
+        int linea = 0;
+        //String cla  = tfClaveProducto.getText();
         
-        if(clave.isEmpty() || clave2.isEmpty())
-            datos = "VACIO";
+        if(num.isEmpty())
+            linea = -1;
         else {
-            datos = clave+"_"+clave2;
-            System.out.println("\n: "+datos);
-        } 
-        System.out.println("\n: "+datos);
-        return datos;
+            //int cla1 = 0;
+            try { 
+                //por si no hay un valor numerico
+                linea = Integer.parseInt(num);
+                //cla1   = Integer.parseInt(cla);
+            } 
+            catch (NumberFormatException nfe) {
+                linea = -2;
+            }  } 
+        return linea;
     }
 
-    public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {
         String datos = "";
-
+        
+        String resultado = "";
 
         if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
-            if(datos.isEmpty()){
+            int linea = obtenerDatos();
+            //System.out.println("linea ="+linea);
+            if(linea == -1){
                 datos = "Datos vacios";
             }
+            else if(linea == -2)
+                   datos = "Ingrese el NUMERO de linea";
+            
+            resultado = companyad.consultarLineaProd(linea);
+            System.out.println("En GUI: "+datos);
             taDatos.setText(datos); 
         }
         if (e.getSource() == bConsultarProducto) {
@@ -105,6 +117,7 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
             if(datos.isEmpty()){
                 datos = "Datos vacios";                
             }
+            taDatos.setText(datos); 
         }
     }
 

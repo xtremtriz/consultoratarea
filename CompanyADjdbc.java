@@ -526,4 +526,31 @@ public class CompanyADjdbc {
 		return datos;	  
     }
     
+    String consultarLineaProd(int clave) {
+        String datos = "";
+        String respuesta = "";
+         ResultSet tr;
+        
+        String query = "SELECT Linea.nombre, Producto.claveProducto FROM Producto JOIN Linea ON Producto.claveLin = Linea.claveLinea WHERE claveLinea = "+clave+"";
+        System.out.println(query);
+        
+        try{
+            statement = conexion.createStatement();
+            tr = statement.executeQuery(query);
+            
+            while(tr.next()){
+                datos = tr.getString(1);
+                    //datos = datos+"_"+tr.getString(i);
+                    //int aStr = ""+tr.getInt(i);
+                    
+                respuesta = respuesta + datos+"\n";
+                //System.out.println(datos);
+            } 
+            statement.close();
+            //System.out.println("\nAD: "+datos);
+        }catch(SQLException sqle){
+            respuesta = "Error consultar cliente "+sqle;
+        }
+        return respuesta;
+    }
 }
