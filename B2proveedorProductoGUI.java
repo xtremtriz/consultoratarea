@@ -86,6 +86,9 @@ public class B2proveedorProductoGUI extends JFrame implements ActionListener {
                 datos = "La clave del proveedor debe ser numerica";
             else
                 datos = companyad.consultarProveedorProducto(clave);
+            if(datos.isEmpty())
+                datos = "No se encontraron registros de "+tfClaveProveedor.getText();
+            //taDatos.setText(datos); 
 
             taDatos.setText(datos); 
         }

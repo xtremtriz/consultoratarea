@@ -90,6 +90,8 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
             else
                 datos = companyad.consultarLineaProd(linea);
             // System.out.println("En GUI: "+datos);
+            if(datos.isEmpty())
+                datos = "No se encontraron registros de "+tfClaveLinea.getText();
             taDatos.setText(datos); 
         }
     }

@@ -32,6 +32,7 @@ create table Producto(
 CREATE TABLE Tiene(
             numeroSucursal INTEGER NOT NULL,
             numeroProducto INTEGER NOT NULL,
+            PRIMARY KEY(numeroSucursal,numeroProducto),
             FOREIGN KEY(numeroSucursal) REFERENCES Sucursal(claveSucursal),
             FOREIGN KEY(numeroProducto) REFERENCES Producto(claveProducto));      
                 
@@ -40,6 +41,7 @@ CREATE TABLE Suministra(
             claveProveedo INTEGER NOT NULL,
             fecha VARCHAR(45) NOT NULL,
             cantidad INTEGER NOT NULL,
+            PRIMARY KEY(claveProduct,claveProveedo),
             FOREIGN KEY(claveProduct) REFERENCES Producto(claveProducto),
             FOREIGN KEY(claveProveedo) REFERENCES Proveedor(claveProveedor));
 

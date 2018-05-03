@@ -132,7 +132,7 @@ public class CompanyADjdbc {
 			
 		}catch(SQLException sqle){	
 			System.out.println("Incorrecta: "+sqle); 
-			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
+			resultado = "Este numero de proveedor ya existe, (Ingresa otro)";	
 		}
 		return resultado;	
 	}
@@ -198,7 +198,7 @@ public class CompanyADjdbc {
 			
 		}catch(SQLException sqle){	
 			System.out.println("Incorrecta: "+sqle); 
-			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
+			resultado = "Este numero de linea ya existe, (Ingresa otro)";	
 		}
 		return resultado;	
 	}
@@ -263,7 +263,7 @@ public class CompanyADjdbc {
 			
 		}catch(SQLException sqle){	
 			System.out.println("Incorrecta: "+sqle); 
-			resultado = "Este numero de sucursal ya existe, (Ingresa otro)";	
+			resultado = "Este numero de producto ya existe, (Ingresa otro)";	
 		}
 		return resultado;	
 	}
@@ -518,6 +518,7 @@ public class CompanyADjdbc {
     String consultarLineaProd(int clave) {
 		String datos = "";
 		String respuesta = "";
+              
         ResultSet tr;
         
         String query = "SELECT Linea.nombre, Producto.claveProducto FROM Producto JOIN Linea ON Producto.claveLin = Linea.claveLinea WHERE claveLinea = "+clave;
@@ -540,6 +541,7 @@ public class CompanyADjdbc {
             //System.out.println("\nAD: "+datos);
         }catch(SQLException sqle){
             respuesta = "Error consultar la linea"+sqle;
+            //resultado = "no existe, (Ingresa otro)";	
         }
         return respuesta;
 	}

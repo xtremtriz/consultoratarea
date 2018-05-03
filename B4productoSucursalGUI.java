@@ -86,7 +86,9 @@ public class B4productoSucursalGUI extends JFrame implements ActionListener {
                 datos = "Ingrese el NUMERO de producto";
             else
                 datos = companyad.consultarSucursalProducto(clave);
-
+            if(datos.isEmpty())
+                datos = "No se encontraron registros de "+tfClaveProducto.getText();
+            //taDatos.setText(datos); 
             taDatos.setText(datos); 
         }
     }

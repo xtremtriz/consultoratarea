@@ -86,7 +86,9 @@ public class B3sucursalProductoGUI extends JFrame implements ActionListener {
                 datos = "Ingrese el NUMERO de sucursal";
             else
                 datos = companyad.consultarProductoSucursal(clave);
-
+            if(datos.isEmpty())
+                datos = "No se encontraron registros de "+tfClaveSucursal.getText();
+            //taDatos.setText(datos); 
             taDatos.setText(datos); 
         }
     }
