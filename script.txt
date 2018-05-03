@@ -53,6 +53,7 @@ CREATE TABLE Localidad(
             telefono INTEGER NOT NULL,
             cp INTEGER NOT NULL,
             claveSucursa INTEGER NOT NULL,
+            PRIMARY KEY(claveSucursa),
             FOREIGN KEY(claveSucursa) REFERENCES Sucursal(claveSucursal));
 
 insert into proveedor values(1010,"Los paisas","Lopez Portillo", 5567842);

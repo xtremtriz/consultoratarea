@@ -263,7 +263,7 @@ public class CompanyADjdbc {
 			
 		}catch(SQLException sqle){	
 			System.out.println("Incorrecta: "+sqle); 
-			resultado = "Este numero de producto ya existe, (Ingresa otro)";	
+			resultado = "Este numero de producto o numero de linea no existe, (Ingresa otro)";	
 		}
 		return resultado;	
 	}
