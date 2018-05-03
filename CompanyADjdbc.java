@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package consultora;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Uriel
- */
 public class CompanyADjdbc {
     SucursalDP sucursalDP;
     ProveedorDP proveedorDP;
@@ -525,13 +514,13 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-    
+/* Consulta los productos de una linea */
     String consultarLineaProd(int clave) {
-        String datos = "";
-        String respuesta = "";
-         ResultSet tr;
+		String datos = "";
+		String respuesta = "";
+        ResultSet tr;
         
-        String query = "SELECT Linea.nombre, Producto.claveProducto FROM Producto JOIN Linea ON Producto.claveLin = Linea.claveLinea WHERE claveLinea = "+clave+"";
+        String query = "SELECT Linea.nombre, Producto.claveProducto FROM Producto JOIN Linea ON Producto.claveLin = Linea.claveLinea WHERE claveLinea = "+clave;
         System.out.println(query);
         
         try{
@@ -539,17 +528,115 @@ public class CompanyADjdbc {
             tr = statement.executeQuery(query);
             
             while(tr.next()){
-                datos = tr.getString(1);
-                    //datos = datos+"_"+tr.getString(i);
-                    //int aStr = ""+tr.getInt(i);
-                    
-                respuesta = respuesta + datos+"\n";
-                //System.out.println(datos);
+				datos = tr.getString(1);
+				String iString = "" +tr.getInt(2);
+
+				datos = datos+"_"+iString+"\n";
+				respuesta = respuesta + datos;
+
+                // System.out.println(respuesta);
             } 
             statement.close();
             //System.out.println("\nAD: "+datos);
         }catch(SQLException sqle){
-            respuesta = "Error consultar cliente "+sqle;
+            respuesta = "Error consultar la linea"+sqle;
+        }
+        return respuesta;
+	}
+/* Productos de un proveedor */
+    String consultarProveedorProducto(int clv) {
+		String datos = "";
+		String respuesta = "";
+        ResultSet tr;
+        
+		String query = "SELECT Proveedor.nombre, telefono, Proveedor.direccion, Producto.claveProducto, Producto.nombre FROM Suministra JOIN Proveedor ON Proveedor.claveProveedor = Suministra.claveProveedo JOIN Producto ON Producto.claveProducto = Suministra.claveProduct WHERE claveProveedor = "+clv;
+		
+		System.out.println(query);
+        
+        try{
+            statement = conexion.createStatement();
+            tr = statement.executeQuery(query);
+            
+            while(tr.next()){
+				String nombre = tr.getString(1);
+				String telefono = "" +tr.getInt(2);
+				String direccion = tr.getString(3);
+				String clave = "" +tr.getInt(4);
+				String nombre2 = tr.getString(5);
+				
+				datos = nombre+"_"+telefono+"_"+direccion+"_"+clave+"_"+nombre2+"\n";
+				respuesta = respuesta + datos;
+                // System.out.println(respuesta);
+            } 
+            statement.close();
+            //System.out.println("\nAD: "+datos);
+        }catch(SQLException sqle){
+            respuesta = "Error consultar los productos del proveedor "+sqle;
+        }
+        return respuesta;
+	}
+/* Productos de una sucursal */
+    String consultarProductoSucursal(int sucursal) {
+		String datos = "";
+		String respuesta = "";
+        ResultSet tr;
+        
+		String query = "SELECT Sucursal.claveSucursal, Sucursal.nombre, Sucursal.direccion, Producto.claveProducto, Producto.nombre FROM Tiene JOIN Producto ON Tiene.numeroProducto = Producto.claveProducto JOIN Sucursal ON Tiene.numeroSucursal = Sucursal.claveSucursal WHERE numeroSucursal = "+sucursal;
+
+		System.out.println(query);
+        
+        try{
+            statement = conexion.createStatement();
+            tr = statement.executeQuery(query);
+            
+            while(tr.next()){
+				String v1 = "" +tr.getInt(1);
+				String v2 = tr.getString(2);
+				String v3 = tr.getString(3);
+				String v4 = "" +tr.getInt(4);
+				String v5 = tr.getString(5);
+				
+				datos = v1+"_"+v2+"_"+v3+"_"+v4+"_"+v5+"\n";
+				respuesta = respuesta + datos;
+                // System.out.println(respuesta);
+            } 
+            statement.close();
+            //System.out.println("\nAD: "+datos);
+        }catch(SQLException sqle){
+            respuesta = "Error consultar los productos de una sucursal "+sqle;
+        }
+        return respuesta;
+    }
+/* Productos en una sucursal */
+    String consultarSucursalProducto(int producto) {
+		String datos = "";
+		String respuesta = "";
+        ResultSet tr;
+        
+		String query = "SELECT Tiene.numeroSucursal, Tiene.numeroProducto, Producto.nombre, Producto.marca, Producto.cantidad, Producto.precio FROM Tiene JOIN Producto ON Tiene.numeroProducto = Producto.claveProducto JOIN Sucursal ON Tiene.numeroSucursal = Sucursal.claveSucursal JOIN Localidad ON Sucursal.claveSucursal = Localidad.claveSucursa WHERE claveProducto = "+ producto;
+		System.out.println(query);
+        
+        try{
+            statement = conexion.createStatement();
+            tr = statement.executeQuery(query);
+            
+            while(tr.next()){
+				String v1 = "" +tr.getInt(1);
+				String v2 = "" +tr.getInt(2);
+				String v3 = tr.getString(3);
+				String v4 = tr.getString(4);
+				String v5 = "" +tr.getInt(5);
+				String v6 = "" +tr.getInt(5);
+
+				
+				datos = v1+"_"+v2+"_"+v3+"_"+v4+"_"+v5+"_"+v6+"\n";
+				respuesta = respuesta + datos;
+                // System.out.println(respuesta);
+            } 
+            statement.close();
+            //System.out.println("\nAD: "+datos);
+        }catch(SQLException sqle){
+            respuesta = "Error consultar los productos de una sucursal "+sqle;
         }
         return respuesta;
     }

@@ -1,5 +1,3 @@
-package consultora;
-
 import java.util.StringTokenizer;
 
 public class SuministraDP {

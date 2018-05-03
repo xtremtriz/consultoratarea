@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package consultora;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,14 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-/**
- *
- * @author Uriel_fabs
- */
-
 public class B1productoLineaGUI extends JFrame implements ActionListener {
-    private JButton bConsultar, bConsultarProducto;
-    private JTextField tfClaveLinea, tfClaveProducto;
+    private JButton bConsultar;
+    private JTextField tfClaveLinea;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
@@ -40,26 +28,20 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
 
         taDatos = new JTextArea(9, 35);//1-3
         tfClaveLinea = new JTextField();
-        tfClaveProducto = new JTextField();
-        bConsultar = new JButton("Consulta General de productos");
-        bConsultarProducto = new JButton("Consultar producto");
+        bConsultar = new JButton("Consultar Productos");
 
         // Adicionar addActionListener a lo JButtons
         bConsultar.addActionListener(this);
-        bConsultarProducto.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
-        panel1.setLayout(new GridLayout(8, 2));
+        panel1.setLayout(new GridLayout(6, 2));
         panel2.setLayout(new FlowLayout());
 
         // 3. Colocar los objetos de los atributos en los JPanels correspondientes
         panel1.add(new JLabel("Clave de linea: "));
         panel1.add(tfClaveLinea);
-        panel1.add(new JLabel("Clave del producto: "));
-        panel1.add(tfClaveProducto);
 
         panel1.add(bConsultar);
-        panel1.add(bConsultarProducto);
 
         panel2.add(panel1);
         panel2.add(new JScrollPane(taDatos));
@@ -96,8 +78,6 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
 
      public void actionPerformed(ActionEvent e) {
         String datos = "";
-        
-        String resultado = "";
 
         if (e.getSource() == bConsultar) {
             int linea = obtenerDatos();
@@ -106,17 +86,10 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
                 datos = "Datos vacios";
             }
             else if(linea == -2)
-                   datos = "Ingrese el NUMERO de linea";
-            
-            resultado = companyad.consultarLineaProd(linea);
-            System.out.println("En GUI: "+datos);
-            taDatos.setText(datos); 
-        }
-        if (e.getSource() == bConsultarProducto) {
-            datos = companyad.consultarProducto();
-            if(datos.isEmpty()){
-                datos = "Datos vacios";                
-            }
+                datos = "Ingrese el NUMERO de linea";
+            else
+                datos = companyad.consultarLineaProd(linea);
+            // System.out.println("En GUI: "+datos);
             taDatos.setText(datos); 
         }
     }

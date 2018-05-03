@@ -27,7 +27,7 @@ create table Producto(
                 precio INTEGER NOT NULL,
                 claveLin INTEGER NOT NULL,
                 PRIMARY KEY(claveProducto),
-                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea
+                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea));
 
 CREATE TABLE Tiene(
             numeroSucursal INTEGER NOT NULL,
@@ -53,4 +53,9 @@ CREATE TABLE Localidad(
             claveSucursa INTEGER NOT NULL,
             FOREIGN KEY(claveSucursa) REFERENCES Sucursal(claveSucursal));
 
-SELECT Linea.nombre, Producto.claveProducto FROM Producto JOIN Linea ON Producto.claveLin = Linea.claveLinea WHERE claveLinea = 45;
+insert into proveedor values(1010,"Los paisas","Lopez Portillo", 5567842);
+insert into proveedor values(2020,"Los hermanos","Miguel Allende", 2456312);
+insert into localidad values("Estado de Mexico","Centro","Hidalgo",476,2187320,50160,10);
+insert into sucursal values(10,"Hidalgo","Hidalgo",2187320);
+insert into sucursal values(20,"Centro","Alameda",21890345);
+insert into sucursal values(30,"Americana","Las americas",2197834);
