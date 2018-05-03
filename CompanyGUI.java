@@ -1,4 +1,3 @@
-package consultora;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -42,10 +41,10 @@ public class CompanyGUI extends JFrame implements ActionListener {
         reportes = new JMenu("Reportes");
         linea = new JMenu("Linea");
         
-        productoLinea = new JMenuItem("Productos que peretenecen a una linea");
-        proveedorProducto = new JMenuItem("Proveedor, productos que suministra");
-        sucursalProducto = new JMenuItem("Productos de una sucursal");
-        productoSucursal = new JMenuItem("Producto a que sucursal pertenece");
+        productoLinea = new JMenuItem("Productos que pertenecen a una linea");
+        proveedorProducto = new JMenuItem("Productos que suministra un Proveedor");
+        sucursalProducto = new JMenuItem("Productos de las Sucursal");
+        productoSucursal = new JMenuItem("Producto en Sucursal");
                 
         AsignarSucursal = new JMenuItem("Introducir datos sucursal");
         AsignarProveedor = new JMenuItem("Introducir datos de proveedor");

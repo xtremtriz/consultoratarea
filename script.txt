@@ -27,12 +27,11 @@ create table Producto(
                 precio INTEGER NOT NULL,
                 claveLin INTEGER NOT NULL,
                 PRIMARY KEY(claveProducto),
-                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea
+                FOREIGN KEY(claveLin) REFERENCES Linea(claveLinea));
 
 CREATE TABLE Tiene(
             numeroSucursal INTEGER NOT NULL,
             numeroProducto INTEGER NOT NULL,
-            PRIMARY KEY(numeroSucursal, numeroProducto),
             FOREIGN KEY(numeroSucursal) REFERENCES Sucursal(claveSucursal),
             FOREIGN KEY(numeroProducto) REFERENCES Producto(claveProducto));      
                 
@@ -41,7 +40,6 @@ CREATE TABLE Suministra(
             claveProveedo INTEGER NOT NULL,
             fecha VARCHAR(45) NOT NULL,
             cantidad INTEGER NOT NULL,
-            PRIMARY KEY(claveProduct, claveProveedo),
             FOREIGN KEY(claveProduct) REFERENCES Producto(claveProducto),
             FOREIGN KEY(claveProveedo) REFERENCES Proveedor(claveProveedor));
 
@@ -54,3 +52,10 @@ CREATE TABLE Localidad(
             cp INTEGER NOT NULL,
             claveSucursa INTEGER NOT NULL,
             FOREIGN KEY(claveSucursa) REFERENCES Sucursal(claveSucursal));
+
+insert into proveedor values(1010,"Los paisas","Lopez Portillo", 5567842);
+insert into proveedor values(2020,"Los hermanos","Miguel Allende", 2456312);
+insert into localidad values("Estado de Mexico","Centro","Hidalgo",476,2187320,50160,10);
+insert into sucursal values(10,"Hidalgo","Hidalgo",2187320);
+insert into sucursal values(20,"Centro","Alameda",21890345);
+insert into sucursal values(30,"Americana","Las americas",2197834);

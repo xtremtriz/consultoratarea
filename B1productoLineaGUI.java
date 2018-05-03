@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package consultora;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,18 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-/**
- *
- * @author Uriel_fabs
- */
-
 public class B1productoLineaGUI extends JFrame implements ActionListener {
-    private JButton bConsultar, bConsultarProducto;
-    private JTextField tfClaveLinea, tfClaveProducto;
+    private JButton bConsultar;
+    private JTextField tfClaveLinea;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
 
-    //private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public B1productoLineaGUI() {
         super("Asignacion de Proveedor");
@@ -40,26 +28,20 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
 
         taDatos = new JTextArea(9, 35);//1-3
         tfClaveLinea = new JTextField();
-        tfClaveProducto = new JTextField();
-        bConsultar = new JButton("Consulta General de productos");
-        bConsultarProducto = new JButton("Consultar producto");
+        bConsultar = new JButton("Consultar Productos");
 
         // Adicionar addActionListener a lo JButtons
         bConsultar.addActionListener(this);
-        bConsultarProducto.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
-        panel1.setLayout(new GridLayout(8, 2));
+        panel1.setLayout(new GridLayout(6, 2));
         panel2.setLayout(new FlowLayout());
 
         // 3. Colocar los objetos de los atributos en los JPanels correspondientes
         panel1.add(new JLabel("Clave de linea: "));
         panel1.add(tfClaveLinea);
-        panel1.add(new JLabel("Clave del producto: "));
-        panel1.add(tfClaveProducto);
 
         panel1.add(bConsultar);
-        panel1.add(bConsultarProducto);
 
         panel2.add(panel1);
         panel2.add(new JScrollPane(taDatos));
@@ -74,37 +56,40 @@ public class B1productoLineaGUI extends JFrame implements ActionListener {
         return this.panel2;
     }
 
-    public String obtenerDatos(){
-        String datos = "";
-        String clave  = tfClaveLinea.getText();
-        String clave2  = tfClaveProducto.getText();
+    public int obtenerDatos(){
+        String num  = tfClaveLinea.getText();
+        int linea = 0;
+        //String cla  = tfClaveProducto.getText();
         
-        if(clave.isEmpty() || clave2.isEmpty())
-            datos = "VACIO";
+        if(num.isEmpty())
+            linea = -1;
         else {
-            datos = clave+"_"+clave2;
-            System.out.println("\n: "+datos);
-        } 
-        System.out.println("\n: "+datos);
-        return datos;
+            //int cla1 = 0;
+            try { 
+                //por si no hay un valor numerico
+                linea = Integer.parseInt(num);
+                //cla1   = Integer.parseInt(cla);
+            } 
+            catch (NumberFormatException nfe) {
+                linea = -2;
+            }  } 
+        return linea;
     }
 
-    public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e) {
         String datos = "";
 
-
         if (e.getSource() == bConsultar) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
-            if(datos.isEmpty()){
+            int linea = obtenerDatos();
+            //System.out.println("linea ="+linea);
+            if(linea == -1){
                 datos = "Datos vacios";
             }
-            taDatos.setText(datos); 
-        }
-        if (e.getSource() == bConsultarProducto) {
-            //datos = companyad.consultaAsignacionEmpleadosProyecto();
-            if(datos.isEmpty()){
-                datos = "Datos vacios";
-            }
+            else if(linea == -2)
+                datos = "Ingrese el NUMERO de linea";
+            else
+                datos = companyad.consultarLineaProd(linea);
+            // System.out.println("En GUI: "+datos);
             taDatos.setText(datos); 
         }
     }
